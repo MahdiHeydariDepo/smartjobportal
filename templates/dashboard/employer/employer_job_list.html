@@ -1,0 +1,11 @@
+<h2>Your Job Listings</h2>
+<a href="{% url 'job-create' %}">+ Create New Job</a>
+<ul>
+  {% for job in object_list %}
+    <li>
+      {{ job.title }} - {{ job.location }}
+      <a href="{% url 'job-edit' job.pk %}">Edit</a> |
+      <a href="{% url 'job-delete' job.pk %}">Delete</a>
+    </li>
+  {% endfor %}
+</ul>

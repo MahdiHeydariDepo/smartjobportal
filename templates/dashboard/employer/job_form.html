@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	  <main>
+    <section class="form-container">
+      <form action="{% url 'employer_dashboard' %}" method="post">
+          {% csrf_token %}
+        <label for="title">عنوان شغل:</label>
+        {{ form.title }}
+
+        <label for="description">توضیحات:</label>
+        {{ form.description }}
+
+        <label for="location">مکان:</label>
+        {{ form.location }}
+
+        <label for="salary">حقوق:</label>
+        {{ form.salary }}
+
+        <button type="submit">ثبت آگهی</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}

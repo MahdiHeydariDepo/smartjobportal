@@ -1,0 +1,25 @@
+<!-- templates/dashboard/employer_dashboard.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+<main>
+    <section class="dashboard">
+      <h2>آگهی‌های شغلی شما</h2>
+      <a href="#" class="btn">+ افزودن آگهی جدید</a>
+
+      <div class="job-list">
+          {% for job in jobs %}
+        <div class="job-card">
+          <h3>{{ job.title }}</h3>
+          <p>مکان: {{ job.location }}</p>
+          <p>درخواست‌ها: {{ job.application_set.count }}</p>
+          <a href="#">مشاهده درخواست‌ها</a>
+        </div>
+        {% endfor %}
+    
+
+        <!-- شغل‌های بیشتر را می‌توان اینجا اضافه کرد -->
+      </div>
+    </section>
+  </main>
+{% endblock %}

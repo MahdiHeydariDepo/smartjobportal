@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <main>
+    <section class="form-container">
+      <form action="#" method="post">
+          {% csrf_token %}
+          
+        <label for="fullname">نام کاربری:</label>
+        {{ form.username }}
+
+        <label for="email">ایمیل:</label>
+        {{ form.email }}
+
+        <label for="password">رمز عبور:</label>
+        {{ form.password1 }}
+
+        <label for="confirm-password">تکرار رمز عبور:</label>
+        {{ form.password2 }}
+          
+        <label for="resume">رزومه</label>
+          {{ form.role }}
+
+        <button type="submit">ثبت‌نام</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}

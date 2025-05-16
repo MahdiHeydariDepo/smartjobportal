@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	  <main>
+    <section class="dashboard">
+      <div class="job-list">
+          {% for job in jobs %}
+        <div class="job-card">
+          <h3>{{ job.title }}</h3>
+          <p>مکان: {{ job.location }}</p>
+          <p>حقوق: {{ job.salary }}</p>
+          <a href="#">ارسال درخواست</a>
+        </div>
+     {% endfor %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

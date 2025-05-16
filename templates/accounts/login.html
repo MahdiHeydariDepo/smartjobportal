@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
+	<main>
+    <section class="form-container">
+      <form action="#" method="post">
+          {% csrf_token %}
+        <label for="username">نام کاربری:</label>
+        <input type="username" id="username" name="username" required>
+
+        <label for="password">رمز عبور:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">ورود</button>
+      </form>
+      <p style="text-align: center; margin-top: 1rem;">
+        حساب ندارید؟ <a href="{% url 'register' %}">ثبت‌نام کنید</a>
+      </p>
+    </section>
+  </main>
+{% endblock %}

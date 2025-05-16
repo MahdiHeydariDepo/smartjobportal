@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پرتال هوشمند کاریابی</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header>
+    <h1>پرتال کاریابی هوشمند</h1>
+    <nav>
+      <a href="{% url 'login' %}">ورود</a>
+      <a href="{% url 'register' %}">ثبت‌نام</a>
+    </nav>
+  </header>
+{% block content %}
+	
+{% endblock %}
+
+  <footer>
+    <p>© 2025 پرتال کاریابی هوشمند</p>
+  </footer>
+</body>
+</html>
+{% block scripts %}
+	
+{% endblock %}
