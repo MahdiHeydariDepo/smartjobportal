@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+	
+  <main>
+    <section class="dashboard">
+    
+      <h2>درخواست‌دهندگان</h2>
+        <h3>{{ job.title }}</h3>
+      <div class="job-list">
+          {% for app in applications %}
+        <div class="job-card">
+          <h3>{{ app.seeker.username }}</h3>
+          <p>ایمیل: {{ app.seeker.email }}</p>
+          <a href="{{ app.resume.url }}">دانلود رزومه</a>
+        </div>
+          {% endfor %}
+      </div>
+    </section>
+  </main>
+
+{% endblock %}

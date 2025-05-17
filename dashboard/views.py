@@ -52,9 +52,10 @@ def create_job(request):
     if request.method == 'POST':
         form = JobForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
+            job = form.save(commit=False)
+            job.employer = request.user
+            job.save()
+            return redirect('employer_dashboard')
     return render(request, 'dashboard/employer/job_form.html', {'form': form})
 
 
@@ -75,6 +76,18 @@ class EmployerJobDeleteView(LoginRequiredMixin, EmployerRequiredMixin, DeleteVie
 
     def get_queryset(self):
         return Job.objects.filter(employer=self.request.user)
+
+
+@login_required
+def job_applications(request, job_id):
+    job = get_object_or_404(Job, id=job_id, employer=request.user)  # Ensure only the job owner can access
+
+    applications = Application.objects.filter(job=job).select_related('seeker')
+
+    return render(request, 'dashboard/employer/job_applications.html', {
+        'job': job,
+        'applications': applications
+    })
 
 
 # Seeker-views********************

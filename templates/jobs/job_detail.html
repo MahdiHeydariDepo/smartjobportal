@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	 <main>
+    <section class="dashboard">
+      <div class="job-card">
+        <h2>{{ job.title }}</h2>
+        <p><strong>مکان:</strong> {{ job.location }}</p>
+        <p><strong>حقوق:</strong> {{ job.salary }}</p>
+        <p><strong>تاریخ انتشار:</strong>{{ job.created_at }}</p>
+        <hr>
+        <p>
+          {{ job.description }}
+        </p>
+        <br>
+        <a href="{% url 'apply-to-job' job.id %}" class="btn">ارسال درخواست</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

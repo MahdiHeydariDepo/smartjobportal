@@ -5,7 +5,7 @@
 <main>
     <section class="dashboard">
       <h2>آگهی‌های شغلی شما</h2>
-      <a href="#" class="btn">+ افزودن آگهی جدید</a>
+      <a href="{% url 'employer_job_create' %}" class="btn">+ افزودن آگهی جدید</a>
 
       <div class="job-list">
           {% for job in jobs %}
@@ -13,7 +13,7 @@
           <h3>{{ job.title }}</h3>
           <p>مکان: {{ job.location }}</p>
           <p>درخواست‌ها: {{ job.application_set.count }}</p>
-          <a href="#">مشاهده درخواست‌ها</a>
+          <a href="{% url 'job-applications' job.id %}">مشاهده درخواست‌ها</a>
         </div>
         {% endfor %}
     

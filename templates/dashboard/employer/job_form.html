@@ -3,7 +3,7 @@
 {% block content %}
 	  <main>
     <section class="form-container">
-      <form action="{% url 'employer_dashboard' %}" method="post">
+      <form  method="post">
           {% csrf_token %}
         <label for="title">عنوان شغل:</label>
         {{ form.title }}

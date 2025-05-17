@@ -4,7 +4,7 @@ from .views import (
     employer_dashboard,
     EmployerJobCreateView,
     EmployerJobUpdateView,
-    EmployerJobDeleteView, seeker_dashboard,create_job
+    EmployerJobDeleteView, seeker_dashboard, create_job, job_applications
 )
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     path('employer/job/<int:pk>/edit/', EmployerJobUpdateView.as_view(), name='employer_job_edit'),
     path('employer/job/<int:pk>/delete/', EmployerJobDeleteView.as_view(), name='employer_job_delete'),
     path('seeker/', seeker_dashboard, name='seeker_dashboard'),
+    path('employer/<int:job_id>/applications/', job_applications, name='job-applications'),
 ]

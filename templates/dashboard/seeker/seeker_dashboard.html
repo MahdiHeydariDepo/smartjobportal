@@ -1,19 +1,27 @@
-{% extends 'home.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-  <h2>Welcome, {{ request.user.username }}</h2>
-  <h3>Your Job Applications</h3>
 
   {% if applications %}
-    <ul>
-      {% for app in applications %}
-        <li>
-          <strong>{{ app.job.title }}</strong> at {{ app.job.company_name }}<br>
-          Status: {{ app.status }}
-        </li>
-      {% endfor %}
-    </ul>
+<main>
+
+  <a href="{% url 'job-list' %}" class="btn">لیست مشاغل</a>
+    <section class="dashboard">
+      <h2>درخواست‌های ارسال شده</h2>
+
+      <div class="job-list">
+          {% for app in applications %}
+        <div class="job-card">
+          <h3>{{ app.job.title }}</h3>
+          <p>وضعیت: {{ app.status }}</p>
+        </div>
+
+    {% endfor %}
+      </div>
+    </section>
+  </main>
+
   {% else %}
-    <p>You haven’t applied to any jobs yet.</p>
+    <h2>هنوز هیچ درخواستی ارسال نکردید!</h2>
   {% endif %}
 {% endblock %}

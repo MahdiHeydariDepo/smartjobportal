@@ -9,12 +9,52 @@
 </head>
 <body>
   <header>
+  {% if request.user.is_seeker %}
+             <nav>
+        <a href="{% url 'seeker_dashboard' %}">داشبورد</a>
+                 <a href="{% url 'job-list' %}">لیست مشاغل</a> 
+       </nav>
+  {% endif %}
+   {% if request.user.is_employer %}
+       <nav>
+        <a href="{% url 'employer_dashboard' %}">داشبورد</a> 
+         <a href="{% url 'job-list' %}">لیست مشاغل</a>  
+       </nav>
+  {% endif %}
     <h1>پرتال کاریابی هوشمند</h1>
     <nav>
-      <a href="{% url 'login' %}">ورود</a>
-      <a href="{% url 'register' %}">ثبت‌نام</a>
+       {% if user.is_authenticated %}
+           <h2>{{ request.user.username }}</h2>
+           <a href="{% url 'logout' %}" class="active">خروج</a>
+       {% else %}
+           <a href="{% url 'login' %}">ورود</a>
+           <a href="{% url 'register' %}">ثبت‌نام</a>     
+      	
+      {% endif %}   
+   
     </nav>
   </header>
+  {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div id="notification-success" class="notification success" style="display: flex;">
+                <span>{{ message }}</span>
+                <button class="close-btn" onclick="closeNotification('notification-success')">×</button>
+            </div>
+            <script>
+                showNotification('notification-success');
+            </script>
+        {% elif message.tags == 'error' %}
+            <div id="notification-error" class="notification error" style="display: flex;">
+                <span>{{ message }}</span>
+                <button class="close-btn" onclick="closeNotification('notification-error')">×</button>
+            </div>
+            <script>
+                showNotification('notification-error');
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 {% block content %}
 	
 {% endblock %}
@@ -23,6 +63,19 @@
     <p>© 2025 پرتال کاریابی هوشمند</p>
   </footer>
 </body>
+<script>
+        function closeNotification(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function showNotification(id) {
+            const notification = document.getElementById(id);
+            notification.style.display = 'flex';
+            setTimeout(() => {
+                closeNotification(id);
+            }, 5000);
+        }
+    </script>
 </html>
 {% block scripts %}
 	

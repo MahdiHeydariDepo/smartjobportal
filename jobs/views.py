@@ -31,14 +31,14 @@ def apply_to_job(request, job_id):
     # Prevent employers from applying
     if request.user.is_employer:
         messages.error(request, "Employers cannot apply to jobs.")
-        return redirect('job-detail', job_id=job.id)
-
-    # Prevent duplicate applications
-    if Application.objects.filter(job=job, seeker=request.user).exists():
-        messages.warning(request, "You have already applied to this job.")
-        return redirect('job-detail', job_id=job.id)
+        return redirect('job_detail', job_id=job.id)
 
     if request.method == 'POST':
+        # Prevent duplicate applications
+        if Application.objects.filter(job=job, seeker=request.user).exists():
+            messages.warning(request, "You have already applied to this job.")
+            return redirect('job_detail', job_id=job.id)
+
         form = ApplicationForm(request.POST, request.FILES)
         if form.is_valid():
             application = form.save(commit=False)
@@ -46,8 +46,13 @@ def apply_to_job(request, job_id):
             application.job = job
             application.save()
             messages.success(request, "Your application was submitted successfully.")
-            return redirect('job-detail', job_id=job.id)
+            return redirect('job_detail', job_id=job.id)
     else:
         form = ApplicationForm()
 
     return render(request, 'jobs/apply.html', {'form': form, 'job': job})
+
+
+def job_detail(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+    return render(request, 'jobs/job_detail.html', {'job': job})

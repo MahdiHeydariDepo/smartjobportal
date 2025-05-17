@@ -1,6 +1,26 @@
-<h2>Apply to: {{ job.title }}</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit Application</button>
-</form>
+{% extends 'base.html' %}
+
+{% block content %}
+
+   <nav>
+    <h1>ارسال درخواست برای:{{ job.title }}</h1>
+   
+      <a href="{% url 'job-list' %}">بازگشت به لیست مشاغل</a>
+    </nav>
+ 
+
+  <main>
+    <section class="form-container" >
+      <form  method="post" enctype="multipart/form-data" >
+          {% csrf_token %}
+        <label for="message">توضیحات شما:</label>
+        {{ form.cover_letter }}
+
+        <label for="resume">آپلود رزومه:</label>
+        {{ form.resume }}
+
+        <button type="submit">ارسال درخواست</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}
